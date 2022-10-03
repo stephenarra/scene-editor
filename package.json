@@ -9,16 +9,45 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.32.7",
+    "@react-three/fiber": "^8.8.7",
+    "@teamwork/websocket-json-stream": "^2.0.0",
+    "@types/socket.io": "^3.0.2",
+    "@types/socket.io-client": "^3.0.0",
+    "@use-gesture/react": "^10.2.20",
+    "classnames": "^2.3.2",
+    "daisyui": "^2.31.0",
+    "leva": "^0.9.31",
+    "lodash": "^4.17.21",
     "next": "12.3.1",
+    "ot-json1": "^1.0.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "reconnecting-websocket": "^4.4.0",
+    "sharedb": "^3.2.0",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2",
+    "three": "^0.145.0",
+    "unique-names-generator": "^4.7.1",
+    "uuid": "^9.0.0",
+    "ws": "^8.9.0",
+    "zustand": "^4.1.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.186",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/sharedb": "^3.2.0",
+    "@types/three": "^0.144.0",
+    "@types/uuid": "^8.3.4",
+    "@types/ws": "^8.5.3",
+    "autoprefixer": "^10.4.12",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8",
     "typescript": "4.8.4"
   }
 }
