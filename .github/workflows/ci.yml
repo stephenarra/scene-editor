@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+    tags-ignore:
+      - "**"
+
+jobs:
+  lint:
+    name: ⬣ Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 📥  Install dependencies
+        run: npm ci
+
+      - name: 🔬 Lint
+        run: npm run lint
+
+  deploy:
+    name: 🚀 Deploy to Fly
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [lint, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Deploy to fly
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
