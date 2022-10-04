@@ -40,6 +40,7 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
 
     return () => {
       mounted = false;
+      res?.connection.close();
       res?.socket.close();
     };
   }, []);
@@ -63,37 +64,3 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useClient = () => useContext(ClientContext);
-
-export const usePresence = () => {
-  const [data, setData] = useState({});
-  const [localPresence, setLocalPresence] = useState<Client.LocalPresence>();
-
-  const { connection } = useClient();
-
-  useEffect(() => {
-    const presence = connection.getPresence("my-channel");
-    presence.subscribe();
-
-    presence.on("receive", (presenceId, update) => {
-      console.log("presence", presenceId, update);
-
-      setData(presence.remotePresences);
-
-      if (update === null) {
-        // The remote client is no longer present in the document
-      } else {
-        // Handle the new value by updating UI, etc.
-      }
-    });
-
-    setLocalPresence(presence.create());
-    // localPresence.submit({ foo: "bar" });
-  }, [connection]);
-
-  return {
-    data,
-    submit: (d: any) => {
-      localPresence?.submit(d);
-    },
-  };
-};

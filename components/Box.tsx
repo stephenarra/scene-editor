@@ -12,8 +12,15 @@ interface Props {
 }
 
 const Box = ({ name, color, ...props }: Props) => {
-  const { target, setTarget } = useStore();
   const [hovered, setHovered] = useState(false);
+  const [target, setTarget] = useStore((state) => [
+    state.target,
+    state.setTarget,
+  ]);
+  const presence = useStore((state) => state.presence);
+  const otherUsers = Object.keys(presence)
+    .map((id) => ({ ...presence[id], id }))
+    .filter((d) => d.selected === name);
 
   const isSelected = target === name;
   useCursor(hovered);
@@ -35,17 +42,20 @@ const Box = ({ name, color, ...props }: Props) => {
         transmission={0}
         metalness={0}
       />
-      {isSelected && (
+      {!!isSelected && (
+        <Edges visible={true} scale={1} threshold={15} renderOrder={1000}>
+          <meshBasicMaterial transparent color="#333" side={THREE.DoubleSide} />
+        </Edges>
+      )}
+      {!!otherUsers.length && (
         <>
-          {/* <Html position={[0.6, 0.5, 0.5]}>
-            <div>First</div>
-          </Html> */}
-          <Edges visible={true} scale={1} threshold={15} renderOrder={1000}>
-            <meshBasicMaterial
-              transparent
-              color="#333"
-              side={THREE.DoubleSide}
-            />
+          <Html position={[0.6, 0.5, 0.5]}>
+            {otherUsers.map((d) => (
+              <div key={d.id}>{d.name}</div>
+            ))}
+          </Html>
+          <Edges visible={true} scale={1.1} threshold={15} renderOrder={1000}>
+            <meshBasicMaterial transparent color={otherUsers[0].color} />
           </Edges>
         </>
       )}

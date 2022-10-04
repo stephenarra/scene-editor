@@ -18,7 +18,7 @@ const Panel = () => {
     state.mode,
     state.setMode,
   ]);
-  const add = useStore((state) => state.add);
+  const add = useStore((state) => state.addBox);
 
   return (
     <div className="absolute z-50 flex flex-col bg-white rounded shadow left-2 top-4">

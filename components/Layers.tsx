@@ -10,8 +10,7 @@ const Layers = () => {
   const instances = useStore((state) => state.instances);
 
   return (
-    <div>
-      <div className="px-3 py-1 font-semibold">Layers</div>
+    <>
       {Object.keys(instances).map((id) => {
         const instance = instances[id];
         return (
@@ -28,7 +27,7 @@ const Layers = () => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
