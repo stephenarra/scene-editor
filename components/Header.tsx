@@ -34,7 +34,9 @@ const Header = () => {
             </div>
           ))}
         </div>
-        <div className="border-r-[1px] border-gray-300 mx-3 h-6"></div>
+        {!!users.length && (
+          <div className="border-r-[1px] border-gray-300 mx-3 h-6"></div>
+        )}
         <div className="avatar placeholder">
           <div
             className="w-8 rounded-full text-neutral-content"

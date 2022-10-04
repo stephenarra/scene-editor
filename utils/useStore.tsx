@@ -14,7 +14,7 @@ interface Presence {
   selected: string | null;
 }
 interface Instance {
-  name: string;
+  displayName: string;
   position: Vector3;
   rotation: Euler;
   scale: Vector3;
